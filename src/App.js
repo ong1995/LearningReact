@@ -21,12 +21,12 @@ class App extends Component {
     OtherState: 'Other state value'
   }
 
-  switchHandler = () => {
+  switchHandler = (newName) => {
     // DO NOT USE THIS -> state.persons[0].name = "test"
     this.setState( {
         persons: [
           {
-            name: "JP Boy",
+            name: newName,
             age: 23
           },
           {
@@ -35,7 +35,7 @@ class App extends Component {
           },
           {
             name: "Ong",
-            age: Math.floor(Math.random() * 30)
+            age: Math.floor(Math.random() * 30) 
           }
         ]
       } )
@@ -45,11 +45,18 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
-        <button onClick={this.switchHandler}>Switch it up</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age} />
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
-        <p>This is really working!</p>
+        <button onClick={() => this.switchHandler("JP Uncle")}>Switch it up</button>
+        <Person 
+          name={this.state.persons[0].name} 
+          age={this.state.persons[0].age} />
+        <Person 
+          name={this.state.persons[1].name} 
+          age={this.state.persons[1].age} 
+          click={this.switchHandler.bind(this, "JP Grandpa")}
+          > My Hobbies: Racing</Person>
+        <Person 
+          ame={this.state.persons[2].name} 
+          age={this.state.persons[2].age} />
       </div>
     );
   }
