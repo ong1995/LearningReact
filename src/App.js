@@ -18,7 +18,8 @@ class App extends Component {
         age: Math.floor(Math.random() * 30)
       },
     ],
-    OtherState: 'Other state value'
+    otherState: 'Other state value',
+    showPersons: false
   }
 
   switchHandler = (newName) => {
@@ -60,6 +61,13 @@ class App extends Component {
     })
   }
 
+  togglePersonsHandler = () => {
+    // const doesShow = ;
+    this.setState({
+      showPersons: !this.state.showPersons
+    });
+  }
+
   render() {
     const style = {
       backgroundColor: "white",
@@ -73,20 +81,24 @@ class App extends Component {
         <h1>Hi, I'm a React App</h1>
         <button 
           style={style}
-          onClick={() => this.switchHandler("JP Uncle")}>Switch it up
+          onClick={this.togglePersonsHandler}>Switch it up
         </button>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} />
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age} 
-          click={this.switchHandler.bind(this, "JP Grandpa")}
-          changed={this.nameChangedHandler}
-          > My Hobbies: Racing</Person>
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age} />
+        {this.state.showPersons ?
+          <div>
+          <Person 
+            name={this.state.persons[0].name} 
+            age={this.state.persons[0].age} />
+          <Person 
+            name={this.state.persons[1].name} 
+            age={this.state.persons[1].age} 
+            click={this.switchHandler.bind(this, "JP Grandpa")}
+            changed={this.nameChangedHandler}
+            > My Hobbies: Racing</Person>
+          <Person 
+            name={this.state.persons[2].name} 
+            age={this.state.persons[2].age} />
+          </div> : null
+        }
       </div>
     );
   }
